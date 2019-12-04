@@ -1,0 +1,33 @@
+﻿{
+  "$schema": "http://json.schemastore.org/launchsettings.json",
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:5000",
+      "sslPort": 0
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "executablePath": "dotnet.exe",
+      "workingDirectory": "$(ProjectDir)",
+      "commandName": "IISExpress",
+      "commandLineArgs": "watch run",
+      "launchBrowser": true,
+      "launchUrl": "api/Values",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "DatingApp": {
+      "commandName": "Project",
+      "launchBrowser": false,
+      "launchUrl": "api/Values",
+      "applicationUrl": "http://localhost:5000",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
