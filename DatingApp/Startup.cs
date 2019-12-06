@@ -24,9 +24,10 @@ namespace DatingApp
         {
             // MvcOptions.EnableEndpointRouting = false;
             services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaulConnection")));
-            services.AddControllers();
+           // services.AddControllers();
             services.AddMvc(option => option.EnableEndpointRouting = false);
             services.AddCors();
+            services.AddScoped<IAuthRepository, AuthRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -37,7 +38,7 @@ namespace DatingApp
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(x => x.AllowAnyOrigin());
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseMvc();
 
             //app.UseRouting();
