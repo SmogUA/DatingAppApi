@@ -29,10 +29,13 @@ namespace DatingApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto UserForRegDTO)
         {
+            
             //validate request
             UserForRegDTO.Username = UserForRegDTO.Username.ToLower();
             if (await _repo.UserExists(UserForRegDTO.Username))
                 return BadRequest("Username already exists");
+            if (UserForRegDTO.Password.Length<=4)
+                return BadRequest("Short Password");
             var userToCreate = new User
             {
                 Username = UserForRegDTO.Username
@@ -43,6 +46,7 @@ namespace DatingApp.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO UserForLoginDTO)
         {
+            throw new Exception("Boroda");
             var userFormRepo = await _repo.Login(UserForLoginDTO.Username.ToLower(), UserForLoginDTO.Password);
             if (userFormRepo == null) return Unauthorized();
 
