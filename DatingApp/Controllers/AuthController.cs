@@ -29,13 +29,11 @@ namespace DatingApp.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto UserForRegDTO)
         {
-            
-            //validate request
+
             UserForRegDTO.Username = UserForRegDTO.Username.ToLower();
+           
             if (await _repo.UserExists(UserForRegDTO.Username))
                 return BadRequest("Username already exists");
-            if (UserForRegDTO.Password.Length<=4)
-                return BadRequest("Short Password");
             var userToCreate = new User
             {
                 Username = UserForRegDTO.Username
