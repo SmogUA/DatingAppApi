@@ -44,7 +44,6 @@ namespace DatingApp.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDTO UserForLoginDTO)
         {
-            throw new Exception("Boroda");
             var userFormRepo = await _repo.Login(UserForLoginDTO.Username.ToLower(), UserForLoginDTO.Password);
             if (userFormRepo == null) return Unauthorized();
 
