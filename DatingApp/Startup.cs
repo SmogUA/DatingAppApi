@@ -30,11 +30,13 @@ namespace DatingApp
         public void ConfigureServices(IServiceCollection services)
         {
             // MvcOptions.EnableEndpointRouting = false;
-            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaulConnection")));
-           // services.AddControllers();
-            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddDbContext<DataContext>(x => x.UseSqlite(Configuration.GetConnectionString("DefaulConnection")));            
+            services.AddControllers().AddNewtonsoftJson(opt => { opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore; });
             services.AddCors();
+            services.AddMvc(option => option.EnableEndpointRouting = false);
+            services.AddTransient<Seed>();
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IDatingRepository, DatingRepository>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options=>{
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
